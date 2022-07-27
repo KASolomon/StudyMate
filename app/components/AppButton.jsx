@@ -2,34 +2,39 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
 import colors from "../config/colors";
+import Icon from "./Icon";
 
-function AppButton({ title, onPress, color = "primary" }) {
+function AppButton({ title, onPress, color, iName, iSize, iColor }) {
   return (
     <TouchableOpacity
-      style={[styles.button, { backgroundColor: colors[color] }]}
+      style={[styles.button, { backgroundColor: color }]}
       onPress={onPress}
     >
       <Text style={styles.text}>{title}</Text>
+      {iName && <Icon name={iName} size={iSize} color={iColor} style = {styles.icon}/>}
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: colors.primary,
     borderRadius: 25,
     justifyContent: "center",
     alignItems: "center",
+    flexDirection: "row",
     padding: 15,
     width: "80%",
     marginVertical: 10,
-    alignSelf : "center",
+    alignSelf: "center",
   },
   text: {
     color: colors.white,
     fontSize: 18,
     textTransform: "uppercase",
     fontWeight: "bold",
+  },
+  icon :{
+    marginHorizontal : 10,
   },
 });
 

@@ -6,6 +6,7 @@ import AppText from "../components/AppText";
 import AppTextInput from "../components/AppTextInput";
 import Icon from "../components/Icon";
 import Screen from "../components/Screen";
+import colors from "../config/colors";
 
 const levels = [
   { id: 0, title: "Level 100", value: 100 },
@@ -24,7 +25,7 @@ export default function ProgrammeScreen() {
     const [sem, setSem] = useState({ title: "", value: 0 });
     return (
     <Screen style={styles.container}>
-        <Icon/>
+        <Icon iconName={'book-open-page-variant-outline'} style ={styles.logo} size = {35} color ={colors.secondary}/>
         <AppText>Welcome ! Let's set you up for study mate.</AppText>
       <AppTextInput placeholder={"Programme"} />
       <AppFormPicker iconName ={"chart-timeline-variant"} data={levels} placeholder="Level" stateVariable={level} setState={setLevel}/>
@@ -35,7 +36,13 @@ export default function ProgrammeScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    //  backgroundColor : colors.primary,
+  logo: {
+    width : 40,
+    height : 40,
+    // padding : 15,
+    backgroundColor : colors.primary,
+    borderRadius : '50%',
+    alignSelf : "center",
+
   },
 });

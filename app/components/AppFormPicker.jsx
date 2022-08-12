@@ -14,23 +14,26 @@ import colors from "../config/colors";
 import { useState } from "react";
 import AppButton from "./AppButton";
 import ListItem from "./ListItem";
+import { useFormikContext } from "formik";
+import AppText from './AppText';
 
 export default function AppFormPicker({ data, placeholder, stateVariable, setState, iconName }) {
   const [visible, setVisible] = useState(false);
+  const {values, handleChange, setFieldValue} = useFormikContext();
+
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setVisible(true)}>
         <View style={styles.pickerContainer}>
-          <MaterialCommunityIcons name={iconName} size={25} style={styles.icon} />
-          <TextInput
-            placeholder={placeholder}
-            value={stateVariable.title}
-            style={styles.picker}
-            
+          <MaterialCommunityIcons
+            name={iconName}
+            size={25}
+            style={styles.icon}
           />
+          <AppText style={styles.picker}>{placeholder}</AppText>
         </View>
       </TouchableWithoutFeedback>
-      <Modal visible={visible} animationType="slide">
+      <Modal visible={visible} style = {styles.modal} animationType="slide">
         <FlatList
           data={data}
           keyExtractor={(item) => item.id}
@@ -39,7 +42,7 @@ export default function AppFormPicker({ data, placeholder, stateVariable, setSta
               title={item.title}
               onPress={() => {
                 setVisible(false);
-                setState(item);
+                // setFieldValue(item.name);
               }}
             />
           )}
@@ -59,14 +62,20 @@ const styles = StyleSheet.create({
     marginRight: 10,
     color: colors.medium,
   },
+  modal :{
+    height : '80%',
+  },
   pickerContainer: {
     backgroundColor: colors.light,
     borderRadius: 25,
     margin: 20,
     padding: 10,
     flexDirection: "row",
+    alignItems : "center",
   },
   picker: {
     width: "100%",
+    color : 'gray',
+    fontSize : 15
   },
 });

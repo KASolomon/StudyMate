@@ -1,15 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import WelcomeScreen from './app/screens/WelcomeScreen';
-import ProgrammeScreen from './app/screens/ProgrammeScreen';
+import { StatusBar } from "expo-status-bar";
+import { Box, NativeBaseProvider } from "native-base";
+import { StyleSheet } from "react-native";
+import ProgrammeScreen from "./app/screens/ProgrammeScreen";
+import SemesterCoursesScreen from "./app/screens/SemesterCoursesScreen";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      {/* <WelcomeScreen/> */}
-      <ProgrammeScreen/>
-      <StatusBar style="auto" />
-    </View>
+    <NativeBaseProvider>
+      <Box flex={1} bg="#fff"  justifyContent="center">
+        
+        {/* <ProgrammeScreen /> */}
+        <SemesterCoursesScreen/>
+        <StatusBar style="auto" />
+      </Box>
+    </NativeBaseProvider>
   );
 }
 

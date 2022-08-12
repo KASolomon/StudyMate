@@ -4,14 +4,16 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import colors from "../config/colors";
 import Icon from "./Icon";
 
-function AppButton({ title, onPress, color, iName, iSize, iColor }) {
+function AppButton({ style, title, onPress, color, iName, iSize, iColor }) {
   return (
     <TouchableOpacity
-      style={[styles.button, { backgroundColor: color }]}
+      style={[styles.button, { backgroundColor: color }, { ...style }]}
       onPress={onPress}
     >
       <Text style={styles.text}>{title}</Text>
-      {iName && <Icon name={iName} size={iSize} color={iColor} style = {styles.icon}/>}
+      {iName && (
+        <Icon name={iName} size={iSize} color={iColor} style={styles.icon} />
+      )}
     </TouchableOpacity>
   );
 }
@@ -33,8 +35,8 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     fontWeight: "bold",
   },
-  icon :{
-    marginHorizontal : 10,
+  icon: {
+    marginHorizontal: 10,
   },
 });
 

@@ -1,48 +1,94 @@
-import React, { useState } from "react";
+import { Formik } from "formik";
+import React from "react";
 import { StyleSheet } from "react-native";
+
+import { Box } from "native-base";
 import AppButton from "../components/AppButton";
-import AppFormPicker from "../components/AppFormPicker";
 import AppText from "../components/AppText";
-import AppTextInput from "../components/AppTextInput";
+import FormInputField from "../components/FormInputField";
+import FormSelectFIeld from "../components/FormSelectFIeld";
 import Icon from "../components/Icon";
 import Screen from "../components/Screen";
 import colors from "../config/colors";
+import StudyMateIcon from "../components/StudyMateIcon";
 
-const levels = [
-  { id: 0, title: "Level 100", value: 100 },
-  { id: 1, title: "Level 200", value: 200 },
-  { id: 2, title: "Level 300", value: 300 },
-  { id: 3, title: "Level 400", value: 400 },
-  { id: 4, title: "Level 500", value: 500 },
-  { id: 5, title: "Level 600", value: 600 },
-];
-const semesters = [
-  { id: 0, title: "Semester 1", value: 1 },
-  { id: 1, title: "Semester 2", value: 2 },
-];
 export default function ProgrammeScreen() {
-    const [level, setLevel] = useState({title : '', value : 0});
-    const [sem, setSem] = useState({ title: "", value: 0 });
-    return (
-    <Screen style={styles.container}>
-        <Icon iconName={'book-open-page-variant-outline'} style ={styles.logo} size = {35} color ={colors.secondary}/>
-        <AppText>Welcome ! Let's set you up for study mate.</AppText>
-      <AppTextInput placeholder={"Programme"} />
-      <AppFormPicker iconName ={"chart-timeline-variant"} data={levels} placeholder="Level" stateVariable={level} setState={setLevel}/>
-      <AppFormPicker data={semesters} placeholder="Semester" stateVariable={sem} setState={setSem}/>
-      <AppButton title={"Next"} iName = "arrow-right" iSize={25} iColor ={"white"}  color ={"black"} onPress ={ () => console.log('Submitted')} />
-    </Screen>
+  const levels =[
+    { label: "Level 100", value: 100 },
+    { label: "Level 200", value: 200 },
+    { label: "Level 300", value: 300 },
+    { label: "Level 400", value: 400 },
+    { label: "Level 500", value: 500 },
+    { label: "Level 600", value: 600 },
+  ];
+  const sem = [
+    { label: "Semester 1", value: 1 },
+    { label: "Semester 2", value: 2 },
+  ];
+  return (
+    <>
+      <Screen style={styles.container}>
+        <Box p={5}>
+          <StudyMateIcon/>
+          <AppText style={styles.caption}>
+            Welcome ! Let's set you up for study mate.
+          </AppText>
+        </Box>
+        <Formik
+          initialValues={{
+            name : '',
+            programme: "",
+            level: 100,
+            semester: 1,
+          }}
+          onSubmit={(values) => console.log(values)}
+        >
+          {({ handleSubmit }) => (
+            <>
+              <FormInputField
+                label="name"
+                placeholder={"Enter Your Name"}
+              />
+              <FormInputField
+                label="programme"
+                placeholder={"Enter Your Programme"}
+              />
+              <FormSelectFIeld label ='level' data ={levels}/>
+              <FormSelectFIeld label ='semester' data ={sem}/>
+              <AppButton
+                title={"Next"}
+                iName="arrow-right"
+                iSize={25}
+                iColor={"white"}
+                color={"black"}
+                onPress={handleSubmit}
+                style ={styles.button}
+              />
+            </>
+          )}
+        </Formik>
+      </Screen>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  logo: {
-    width : 40,
-    height : 40,
-    // padding : 15,
-    backgroundColor : colors.primary,
-    borderRadius : '50%',
-    alignSelf : "center",
+  button: {
+    marginVertical : 50
+  },
+  container: {
+    justifyContent: "center",
+    padding : 6
+  },
+  inputField: {
+    marginLeft: 10,
+  },
 
+  picker: {
+    width: "80%",
+  },
+  caption: {
+    alignSelf: "center",
+    marginBottom: 20,
   },
 });

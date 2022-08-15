@@ -73,10 +73,7 @@ export default function ProgrammeScreen() {
 }
 
 const styles = StyleSheet.create({
-  button: {
-    marginVertical : 50
-  },
-  container: {
+ container: {
     justifyContent: "center",
     padding : 6
   },

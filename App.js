@@ -2,7 +2,8 @@ import { StatusBar } from "expo-status-bar";
 import { Box, NativeBaseProvider } from "native-base";
 import { StyleSheet } from "react-native";
 import ProgrammeScreen from "./app/screens/ProgrammeScreen";
-import SemesterCoursesScreen from "./app/screens/SemesterCoursesScreen";
+import PrevSemCourses from "./app/screens/PrevSemCourses";
+import TargetDisplayScreen from "./app/screens/TargetDisplayScreen";
 
 export default function App() {
   return (
@@ -10,7 +11,8 @@ export default function App() {
       <Box flex={1} bg="#fff"  justifyContent="center">
         
         {/* <ProgrammeScreen /> */}
-        <SemesterCoursesScreen/>
+        {/* <PrevSemCourses/> */}
+        <TargetDisplayScreen/>
         <StatusBar style="auto" />
       </Box>
     </NativeBaseProvider>

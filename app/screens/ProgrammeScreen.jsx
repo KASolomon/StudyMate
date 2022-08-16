@@ -29,14 +29,13 @@ export default function ProgrammeScreen() {
     <>
       <Screen style={styles.container}>
         <Box p={5}>
-          <StudyMateIcon/>
-          <AppText style={styles.caption}>
-            Welcome ! Let's set you up for study mate.
-          </AppText>
+          <StudyMateIcon
+            caption={"Welcome ! Let's set you up for study mate."}
+          />
         </Box>
         <Formik
           initialValues={{
-            name : '',
+            name: "",
             programme: "",
             level: 100,
             semester: 1,
@@ -45,16 +44,13 @@ export default function ProgrammeScreen() {
         >
           {({ handleSubmit }) => (
             <>
-              <FormInputField
-                label="name"
-                placeholder={"Enter Your Name"}
-              />
+              <FormInputField label="name" placeholder={"Enter Your Name"} />
               <FormInputField
                 label="programme"
                 placeholder={"Enter Your Programme"}
               />
-              <FormSelectFIeld label ='level' data ={levels}/>
-              <FormSelectFIeld label ='semester' data ={sem}/>
+              <FormSelectFIeld label="level" data={levels} />
+              <FormSelectFIeld label="semester" data={sem} />
               <AppButton
                 title={"Next"}
                 iName="arrow-right"
@@ -62,7 +58,7 @@ export default function ProgrammeScreen() {
                 iColor={"white"}
                 color={"black"}
                 onPress={handleSubmit}
-                style ={styles.button}
+                style={styles.button}
               />
             </>
           )}

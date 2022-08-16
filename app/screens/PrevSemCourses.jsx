@@ -11,13 +11,16 @@ import StudyMateIcon from "./../components/StudyMateIcon";
 export default function SemesterCoursesScreen() {
   return (
     <Box p={6}>
-      <StudyMateIcon />
-      <AppText style={styles.caption}>Let's set up this semester's courses</AppText>
+      <StudyMateIcon
+        caption={"Almost There! Targets should be just right for you."}
+      />
+      <AppText style={styles.caption}>
+        Please fill in the details below for last semester's courses
+      </AppText>
       <Box p={5}>
         <Formik
-          initialValues={{ courses: [{ course: "", credit: 1 }]}}
+          initialValues={{ courses: [{ score: 0, credit: 1 }] }}
           onSubmit={(values) => console.log(values)}
-          
         >
           {({ handleChange, handleSubmit }) => (
             <>
@@ -33,12 +36,12 @@ export default function SemesterCoursesScreen() {
                       key={index}
                     >
                       <TextField
-                        name={`courses[${index}]['course']`}
+                        name={`courses[${index}]['score']`}
                         value={courses.course}
                         onChangeText={handleChange(
-                          `courses[${index}]['course']`
+                          `courses[${index}]['score']`
                         )}
-                        placeholder="Course"
+                        placeholder="Course score"
                         w={"60%"}
                         fontSize={font.md}
                       />
@@ -48,13 +51,13 @@ export default function SemesterCoursesScreen() {
                         onChangeText={handleChange(
                           `courses[${index}]['credit']`
                         )}
-                        placeholder="Credit Hour"
+                        placeholder="Credit Hours"
                         w={"20%"}
                         fontSize={font.md}
                       />
                       <Button
                         onPress={() => {
-                          push({ course: "", credit: 1 });
+                          push({ score: 0, credit: 1 });
                         }}
                         bgColor={"green.700"}
                       >
@@ -74,10 +77,13 @@ export default function SemesterCoursesScreen() {
                   ));
                 }}
               </FieldArray>
-              <AppButton color={colors.primary} onPress={handleSubmit} title={'Submit'}></AppButton>
+              <AppButton
+                color={colors.primary}
+                onPress={handleSubmit}
+                title={"See targets"}
+              ></AppButton>
             </>
           )}
-
         </Formik>
       </Box>
     </Box>

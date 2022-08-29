@@ -7,12 +7,24 @@ import AppText from "../components/AppText";
 import colors from "../config/colors";
 import font from "../config/font";
 import StudyMateIcon from "./../components/StudyMateIcon";
+import Screen from './../components/Screen';
+
+
+const handleFormSubmit = async (values) => {
+  try {
+    const jsonValue = JSON.stringify(values);
+    await AsyncStorage.setItem('prevSemCourse', jsonValue);
+    console.log('stored')
+  } catch (error) {
+    console.log(error)
+  }
+};
 
 export default function SemesterCoursesScreen() {
   return (
-    <Box p={6}>
+    <Screen >
       <StudyMateIcon
-        caption={"Almost There! Targets should be just right for you."}
+        
       />
       <AppText style={styles.caption}>
         Please fill in the details below for last semester's courses
@@ -20,7 +32,7 @@ export default function SemesterCoursesScreen() {
       <Box p={5}>
         <Formik
           initialValues={{ courses: [{ score: 0, credit: 1 }] }}
-          onSubmit={(values) => console.log(values)}
+          onSubmit={(values) => handleFormSubmit(values)}
         >
           {({ handleChange, handleSubmit }) => (
             <>
@@ -86,7 +98,7 @@ export default function SemesterCoursesScreen() {
           )}
         </Formik>
       </Box>
-    </Box>
+    </Screen>
   );
 }
 

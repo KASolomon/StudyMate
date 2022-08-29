@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import DataTable, { COL_TYPES } from "react-native-datatable-component";
 import StudyMateIcon from "../components/StudyMateIcon";
+import Screen from "../components/Screen";
 import { Box } from "native-base";
 
 const data = [
@@ -16,8 +17,8 @@ const data = [
 export default function TargetDisplayScreen() {
   return (
     <>
+      <Screen >
       <StudyMateIcon caption ={'Try aiming at these scores for this semester'}/>
-      <Box w={'90%'} marginX ={"5%"} borderRadius ={25}>
 
       <DataTable
         data={data}
@@ -30,7 +31,7 @@ export default function TargetDisplayScreen() {
         headerLabelStyle ={{color : 'grey', fontSize : 12}}
         
       />
-      </Box>
+      </Screen>
       
     </>
   );

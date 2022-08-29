@@ -4,11 +4,12 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import colors from "../config/colors";
 import Icon from "./Icon";
 
-function AppButton({ style, title, onPress, color, iName, iSize, iColor }) {
+function AppButton({ style, title, onPress, color, iName, iSize, iColor}) {
   return (
     <TouchableOpacity
       style={[styles.button, { backgroundColor: color }, { ...style }]}
-      onPress={onPress}
+      onPress={onPress} 
+      
     >
       <Text style={styles.text}>{title}</Text>
       {iName && (
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: 15,
     width: "80%",
-    marginVertical: 60,
+    marginVertical: 30,
     alignSelf: "center",
   },
   text: {

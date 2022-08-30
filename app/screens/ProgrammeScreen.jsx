@@ -27,7 +27,7 @@ const validationSchema = yup.object().shape({
 const handleSubmitFunction = async (data) => {
   try {
     const stringified = JSON.stringify(data);
-    await AsyncStorage.setItem("initialBio", stringified);
+    await AsyncStorage.setItem("initialbio", stringified);
     // console.log(data);
     console.log("stored");
   } catch (error) {

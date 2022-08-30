@@ -13,38 +13,35 @@ import font from "../config/font";
 import StudyMateIcon from "./../components/StudyMateIcon";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 
-const validationSchema = yup.object().shape({
-  courses: yup.array().of(
-    yup.object().shape({
-      course: yup.string().required().min(1).label("Course"),
-      credit: yup.number().required().min(1).label("Credit hour"),
-    })
-  ),
-});
 
 const handleFormSubmit = async (values) => {
+  let totalcredit = 0;
+  for (const course of values.courses) {
+      totalcredit += course.credit;
+  }
+  values = {totalcredit, ...values};
   try {
     const jsonValue = JSON.stringify(values);
-    await AsyncStorage.setItem("semCourse", jsonValue);
+    await AsyncStorage.setItem("semcourse", jsonValue);
     console.log("stored");
   } catch (error) {
     console.log(error);
   }
-  console.log(values)
+  console.log(values);
 };
 
-const STRING_REGEX = /^[a-zA-Z ]*$/;
 const WHOLENUM_REGEX = /^\d+$/;
 
 export default function SemesterCoursesScreen() {
   const {
     control,
-    formState: { errors }, handleSubmit
+    formState: { errors },
+    handleSubmit,
   } = useForm();
   const { fields, append, remove } = useFieldArray({
     control,
     name: "courses",
-    rules :{ required : {value:true, message : 'All fields are required'}}
+    rules: { required: { value: true, message: "All fields are required" } },
   });
   return (
     <Screen>
@@ -56,12 +53,14 @@ export default function SemesterCoursesScreen() {
         <Box p={5}>
           {fields.map((field, index) => (
             <React.Fragment key={field.id}>
-              {console.log(errors)}
+             
               <Box flexDir={"row"} justifyContent={"space-evenly"}>
                 <Controller
                   control={control}
                   name={`courses.${index}.course`}
-                  rules={{ pattern: STRING_REGEX }}
+                  rules={{
+                    required: { value: true, message: "Fields are required" },
+                  }}
                   render={({ field: { onChange, value } }) => {
                     return (
                       <TextField
@@ -78,11 +77,12 @@ export default function SemesterCoursesScreen() {
                   control={control}
                   name={`courses.${index}.credit`}
                   rules={{
+                    required: { value: true, message: "Fields are required" },
                     pattern: {
                       value: WHOLENUM_REGEX,
                       message: "Credit hour must be a number",
                     },
-                    validate: (value) => value > 0,
+                    validate: (value) => value > 0 && value < 10 || 'The credit hour is too high',
                   }}
                   render={({ field: { onChange, value } }) => {
                     return (
@@ -108,8 +108,15 @@ export default function SemesterCoursesScreen() {
                   </Button>
                 ) : null}
               </Box>
-              {/* <ErrorMessage error={errors[`courses.${index}.credit`]} /> */}
-              <ErrorMessage error={errors.credit} />
+
+              {errors.courses && errors.courses[`${index}`] && (
+                <ErrorMessage error={errors.courses[`${index}`].course} />
+              )}
+              {errors.courses &&
+                errors.courses[`${index}`] &&
+                !errors.courses[`${index}`].course && (
+                  <ErrorMessage error={errors.courses[`${index}`].credit} />
+                )}
             </React.Fragment>
           ))}
 

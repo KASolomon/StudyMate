@@ -12,11 +12,11 @@ export default function App() {
       <Box flex={1} bg="#fff"  >
 
         {/* <CwaScreen/> */}
-        <SemesterCoursesScreen/>
+        {/* <SemesterCoursesScreen/> */}
          {/* <ProgrammeScreen /> */}
          
         {/* <PrevSemCourses/> */}
-        {/* <TargetDisplayScreen/> */}
+        <TargetDisplayScreen/>
         <StatusBar style="auto" />
       </Box>
     </NativeBaseProvider>

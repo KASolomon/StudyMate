@@ -11,7 +11,7 @@ import colors from "../config/colors";
 const handleFormSubmit = async (data) => {
   try {
     const stringified = JSON.stringify(data);
-    await AsyncStorage.setItem("CWA", stringified);
+    await AsyncStorage.setItem("cwa", stringified);
     console.log("stored CWA");
   } catch (error) {
     console.log(error);

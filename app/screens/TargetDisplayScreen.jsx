@@ -21,7 +21,7 @@ export default function TargetDisplayScreen() {
   const [userdata, setUserData] = useState({});
   const [scores, setScores] = useState({});
   const [higher, setHigher] = useState(false);
-  const [finalcwa, setFinalcwa] = useState(0);
+  let [finalcwa, setFinalcwa] = useState(0);
 
   useEffect(() => {
     async function getData() {
@@ -94,7 +94,7 @@ export default function TargetDisplayScreen() {
         />
 
         <DataTable
-          data={data}
+          data={scores}
           colNames={["course", "credit", "score"]}
           colSettings={[
             { name: "course", type: COL_TYPES.STRING, width: "70%" },
@@ -104,7 +104,7 @@ export default function TargetDisplayScreen() {
           noOfPages={1}
           headerLabelStyle={{ color: "grey", fontSize: 12 }}
         />
-        {higher ? <Box bgColor={'#cbfab6'}><AppText style={{color: '#53b52a'}}>With these scores you can even get to {finalcwa}</AppText></Box>
+        {higher ? <Box><AppText style={{color: '#53b52a', fontStyle : 'italic'}}>With these scores you can get a CWA of {finalcwa}</AppText></Box>
         : <AppText>Target CWA {finalcwa}</AppText>}
       </Screen>
     </>

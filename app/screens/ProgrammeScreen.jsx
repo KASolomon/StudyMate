@@ -17,12 +17,7 @@ import ErrorMessage from "../components/ErrorMessage";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useForm } from "react-hook-form";
 
-const validationSchema = yup.object().shape({
-  name: yup.string().required().label("Name"),
-  programme: yup.string().required().label("Programme"),
-  level: yup.number().required().label("Level"),
-  semester: yup.number().required().label("Semester"),
-});
+
 
 const handleSubmitFunction = async (data) => {
   try {

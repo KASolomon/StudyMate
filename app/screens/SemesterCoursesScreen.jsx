@@ -17,7 +17,8 @@ import { Controller, useFieldArray, useForm } from "react-hook-form";
 const handleFormSubmit = async (values) => {
   let totalcredit = 0;
   for (const course of values.courses) {
-      totalcredit += course.credit;
+      course.credit = parseInt(course.credit)
+      totalcredit = totalcredit + course.credit;
   }
   values = {totalcredit, ...values};
   try {

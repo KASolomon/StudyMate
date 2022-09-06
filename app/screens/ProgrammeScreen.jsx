@@ -19,17 +19,6 @@ import { useForm } from "react-hook-form";
 
 
 
-const handleSubmitFunction = async (data) => {
-  try {
-    const stringified = JSON.stringify(data);
-    await AsyncStorage.setItem("initialbio", stringified);
-    // console.log(data);
-    console.log("stored");
-  } catch (error) {
-    console.log(error);
-  }
-  // console.log(data);
-};
 
 const levels = [
   { label: "Level 100", value: 100 },
@@ -44,7 +33,18 @@ const sem = [
   { label: "Semester 2", value: 2 },
 ];
 
-export default function ProgrammeScreen() {
+export default function ProgrammeScreen({navigation}) {
+  const handleSubmitFunction = async (data) => {
+    try {
+      const stringified = JSON.stringify(data);
+      await AsyncStorage.setItem("initialbio", stringified);
+      // console.log(data);
+      console.log("stored");
+    } catch (error) {
+      console.log(error);
+    }
+    navigation.navigate('CwaScreen')
+  };
   const {
     control,
     formState: { errors },

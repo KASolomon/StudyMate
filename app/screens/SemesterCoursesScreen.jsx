@@ -14,26 +14,27 @@ import StudyMateIcon from "./../components/StudyMateIcon";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 
 
-const handleFormSubmit = async (values) => {
-  let totalcredit = 0;
-  for (const course of values.courses) {
-      course.credit = parseInt(course.credit)
-      totalcredit = totalcredit + course.credit;
-  }
-  values = {totalcredit, ...values};
-  try {
-    const jsonValue = JSON.stringify(values);
-    await AsyncStorage.setItem("semcourse", jsonValue);
-    console.log("stored");
-  } catch (error) {
-    console.log(error);
-  }
-  console.log(values);
-};
 
 const WHOLENUM_REGEX = /^\d+$/;
 
-export default function SemesterCoursesScreen() {
+export default function SemesterCoursesScreen({navigation}) {
+  const handleFormSubmit = async (values) => {
+    let totalcredit = 0;
+    for (const course of values.courses) {
+        course.credit = parseInt(course.credit)
+        totalcredit = totalcredit + course.credit;
+    }
+    values = {totalcredit, ...values};
+    try {
+      const jsonValue = JSON.stringify(values);
+      await AsyncStorage.setItem("semcourse", jsonValue);
+      navigation.navigate("TargetDisplayScreen");
+      console.log("stored");
+    } catch (error) {
+      console.log(error);
+    }
+    console.log(values);
+  };
   const {
     control,
     formState: { errors },

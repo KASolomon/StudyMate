@@ -1,27 +1,38 @@
 import React from "react";
 import { ImageBackground, StyleSheet, View, Image, Text } from "react-native";
 import AppButton from "../components/AppButton";
+import Screen from "../components/Screen";
+import StudyMateIcon from "../components/StudyMateIcon";
 
-function WelcomeScreen(props) {
+function WelcomeScreen({navigation}) {
   return (
-    <ImageBackground
-      blurRadius={10}
-      style={styles.background}
-      source={require("../assets/background.jpg")}
-    >
-      <View style={styles.logoContainer}>
-        <Image style={styles.logo} source={require("../assets/logo-red.png")} />
-        <Text style={styles.tagline}>Study Mate</Text>
-      </View>
-      <View style={styles.buttonsContainer}>
-        <AppButton title="Login" iName={'login'} iColor ={'black'} iSize ={24} />
-        <AppButton title="Register" color="secondary" />
-      </View>
-    </ImageBackground>
+    // <ImageBackground
+    //   blurRadius={10}
+    //   style={styles.background}
+    //   source={require("../assets/background.jpg")}
+    // >
+    //   <View style={styles.logoContainer}>
+    //     <Image style={styles.logo} source={require("../assets/logo-red.png")} />
+    //     <Text style={styles.tagline}>Study Mate</Text>
+    //   </View>
+    //   <View style={styles.buttonsContainer}>
+    //     <AppButton title="Register" color="secondary" />
+    //   </View>
+    // </ImageBackground>
+    <View style = {styles.container}>
+
+      <StudyMateIcon caption={'Welcome to Study Mate.'}/>
+      <AppButton title="Get Started" onPress = {()=> navigation.navigate('ProgrammeScreen')} color={'black'} iName={'login'} iColor ={'white'} iSize ={24} />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container :{
+    flex : 1,
+    justifyContent : "center",
+    alignItems : 'center'
+  },
   background: {
     flex: 1,
     justifyContent: "flex-end",

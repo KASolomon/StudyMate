@@ -8,20 +8,21 @@ import Screen from "../components/Screen";
 import StudyMateIcon from "../components/StudyMateIcon";
 import colors from "../config/colors";
 
-const handleFormSubmit = async (data) => {
-  try {
-    const stringified = JSON.stringify(data);
-    await AsyncStorage.setItem("cwa", stringified);
-    console.log("stored CWA");
-  } catch (error) {
-    console.log(error);
-  }
-  console.log(data);
-};
 
 const DECIMAL_REGEX = /^\d+\.?\d*$/;
 
-export default function CwaScreen() {
+export default function CwaScreen({navigation}) {
+  const handleFormSubmit = async (data) => {
+    try {
+      const stringified = JSON.stringify(data);
+      await AsyncStorage.setItem("cwa", stringified);
+      console.log("stored CWA");
+    } catch (error) {
+      console.log(error);
+    }
+    console.log(data);
+    navigation.navigate("SemesterCourses");
+  };
   const {
     formState: { errors },
     control,

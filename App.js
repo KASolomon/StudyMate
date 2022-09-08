@@ -9,7 +9,6 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from "@react-navigation/native";
 import WelcomeScreen from './app/screens/WelcomeScreen';
 import { createStackNavigator } from "@react-navigation/stack";
-import DisplayScreen2 from "./app/screens/DisplayScreen2";
 
 
 const Tab = createBottomTabNavigator();
@@ -19,7 +18,7 @@ export default function App() {
   return (
     <NativeBaseProvider>
       <Box flex={1} bg="#fff">
-        {/* <NavigationContainer>
+        <NavigationContainer>
           <Stack.Navigator
             screenOptions={{
               headerShown: false,
@@ -42,13 +41,13 @@ export default function App() {
               options={{ header: false }}
             />
           </Stack.Navigator>
-        </NavigationContainer> */}
+        </NavigationContainer>
         {/* <CwaScreen/> */}
         {/* <SemesterCoursesScreen/> */}
         {/* <ProgrammeScreen /> */}
 
         {/* <PrevSemCourses/> */}
-        <DisplayScreen2/>
+        {/* <DisplayScreen2/> */}
         {/* <TargetDisplayScreen /> */}
         <StatusBar style="auto" />
       </Box>

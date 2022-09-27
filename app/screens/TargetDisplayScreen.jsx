@@ -20,7 +20,7 @@ const data = [
   { course: "Real-Time and Embedded Systems", score: 79 },
   { course: "Computer Networks", score: 87 },
 ];
-export default function TargetDisplayScreen() {
+export default function TargetDisplayScreen({navigation}) {
   const [compute, setCompute] = useState(true);
   const [higher, setHigher] = useState(false);
   const [myScores, setMyScores] = useState([]);
@@ -130,19 +130,13 @@ export default function TargetDisplayScreen() {
         <AppButton
           title={"Show Me"}
           color={"black"}
-          onPress={() => console.log(myScores)}
+          onPress={() => navigation.navigate('AppNotification')}
         />
         {myScores && <DataTabl data={myScores} />}
 
-        {higher ? (
-          <Box>
-            <AppText style={{ color: "#53b52a", fontStyle: "italic" }}>
-              With these scores you can get a CWA of {finalcwa}
-            </AppText>
-          </Box>
-        ) : (
+        
           <AppText>Target CWA {finalcwa}</AppText>
-        )}
+        
       </Screen>
     </>
   );

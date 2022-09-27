@@ -9,6 +9,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from "@react-navigation/native";
 import WelcomeScreen from './app/screens/WelcomeScreen';
 import { createStackNavigator } from "@react-navigation/stack";
+import AppNotification from "./app/components/AppNotification";
 
 
 const Tab = createBottomTabNavigator();
@@ -40,8 +41,14 @@ export default function App() {
               component={ProgrammeScreen}
               options={{ header: false }}
             />
+            <Stack.Screen
+              name="AppNotification"
+              component={AppNotification}
+              options={{ header: false }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
+        {/* <AppNotification /> */}
         {/* <CwaScreen/> */}
         {/* <SemesterCoursesScreen/> */}
         {/* <ProgrammeScreen /> */}

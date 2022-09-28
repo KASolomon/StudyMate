@@ -38,7 +38,7 @@ import { Controller, useForm, useFieldArray } from "react-hook-form";
 // });
 
 export default function AppNotification({ navigation }) {
-  const [course, setCourse] = useState([]);
+  const [storedCourse, setStoredCourse] = useState([]);
   const [time, setTime] = useState(new Date());
   const [timeString, setTimeString] = useState("");
   const [showPicker, setShowPicker] = useState(false);
@@ -54,9 +54,11 @@ export default function AppNotification({ navigation }) {
     courses.map((semcourse) => {
       courseNames.push(semcourse.course);
     });
-    setCourse(courseNames);
+    setStoredCourse(courseNames);
   };
-const handleFormSubmit = async (values) => {};
+const handleFormSubmit = async (values) => {
+  console.log(values)
+};
 
   useEffect(() => {
     getCourseNames();
@@ -84,14 +86,14 @@ const handleFormSubmit = async (values) => {};
           "This would get us nowhere without a plan. Lets get you a timetable"
         }
       />
-      <ScrollView horizontal={true}>
+      {/* <ScrollView horizontal={true}>
         <Box style={styles.timetableContainer}>
           <AppText>Monday</AppText>
         </Box>
         <Box style={styles.timetableContainer}></Box>
         <Box style={styles.timetableContainer}></Box>
         <Box style={styles.timetableContainer}></Box>
-      </ScrollView>
+      </ScrollView> */}
       {fields.map((field, index) => {
         <React.Fragment key={field.id}>
           <Controller
@@ -105,14 +107,14 @@ const handleFormSubmit = async (values) => {};
                   minWidth={"50%"}
                   onValueChange={onChange}
                 >
-                  {course.map((course, index) => (
-                    <Select.Item label={course} value={course} key={index} />
-                  ))}
+                  {storedCourse.map((course, index) => <Select.Item label={course} value={course} key={index} />
+                  )}
                 </Select>
               );
             }}
+            rules = {{required : true}}
           />
-          <Controller
+          {/* <Controller
             control={control}
             name={`monday.${index}.time`}
             render={({ field }) => {
@@ -159,7 +161,7 @@ const handleFormSubmit = async (values) => {};
                 </>
               );
             }}
-          />
+          /> */}
           {index > 0 ? (
             <Button
               onPress={() => {
@@ -194,7 +196,7 @@ const handleFormSubmit = async (values) => {};
           minWidth={"50%"}
           onValueChange={(value) => setCourse(value)}
         >
-          {course.map((course, index) => (
+          {storedCourse.map((course, index) => (
             <Select.Item label={course} value={course} key={index} />
           ))}
         </Select>

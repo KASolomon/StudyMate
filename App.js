@@ -10,6 +10,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import WelcomeScreen from './app/screens/WelcomeScreen';
 import { createStackNavigator } from "@react-navigation/stack";
 import AppNotification from "./app/components/AppNotification";
+import TestingSelect from "./app/screens/TestingSelect";
 
 
 const Tab = createBottomTabNavigator();
@@ -19,7 +20,7 @@ export default function App() {
   return (
     <NativeBaseProvider>
       <Box flex={1} bg="#fff">
-        <NavigationContainer>
+        {/* <NavigationContainer>
           <Stack.Navigator
             screenOptions={{
               headerShown: false,
@@ -47,7 +48,8 @@ export default function App() {
               options={{ header: false }}
             />
           </Stack.Navigator>
-        </NavigationContainer>
+        </NavigationContainer> */}
+        <TestingSelect/>
         {/* <AppNotification /> */}
         {/* <CwaScreen/> */}
         {/* <SemesterCoursesScreen/> */}

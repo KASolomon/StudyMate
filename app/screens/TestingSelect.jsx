@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TouchableWithoutFeedback } from "react-native";
 import React, { useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { useFieldArray, Controller } from "react-hook-form";
-import { Select, Input } from "native-base";
+import { Select, Input, Box } from "native-base";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 import AppButton from "../components/AppButton";
@@ -39,7 +39,7 @@ export default function TestingSelect() {
       {fields.map((field, index) => {
         const timeUTC = watch(`monday.${index}.time`);
         return (
-          <React.Fragment key={field.id}>
+          <Box key={field.id} flexDir={'row'}>
             <Controller
               control={control}
               name={`monday.${index}.course`}
@@ -48,6 +48,7 @@ export default function TestingSelect() {
                   key={field.id}
                   selectedValue={value}
                   onValueChange={onChange}
+                  width ={'65%'}
                 >
                   {coursenames.map((course, index) => (
                     <Select.Item label={course} value={course} key={index} />
@@ -61,7 +62,7 @@ export default function TestingSelect() {
               control={control}
               render={({ field: { onChange, value } }) => (
                 <>
-                  <TouchableWithoutFeedback onPress={() => setShowPicker(true)}>
+                  <TouchableWithoutFeedback onPress={() => setShowPicker(true)} width ={'20%'}>
                     <View
                       style={{
                         width: "20%",
@@ -72,9 +73,7 @@ export default function TestingSelect() {
                       }}
                     >
                       <Input
-                        value={() => {
-                          return onChangeDateTime(timeUTC);
-                        }}
+                        value={onChangeDateTime(value)}
                         variant="underlined"
                         isReadOnly={true}
                         w={"50%"}
@@ -105,7 +104,7 @@ export default function TestingSelect() {
                 </>
               )}
             />
-          </React.Fragment>
+          </Box>
         );
       })}
       <AppButton

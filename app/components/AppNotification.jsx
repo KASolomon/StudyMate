@@ -1,23 +1,15 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TouchableWithoutFeedback,
-} from "react-native";
-import React, { useState, useEffect } from "react";
-import { Box, Input, ScrollView, Select, HStack } from "native-base";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import Screen from "./Screen";
-import * as Notifications from "expo-notifications";
-import AppText from "./AppText";
-import StudyMateIcon from "./StudyMateIcon";
-import AppTextInput from "./AppTextInput";
-import FormInputField from "./FormInputField";
+import { Box, Input, Select } from "native-base";
+import React, { useEffect, useState } from "react";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
+import {
+  Button, StyleSheet, TouchableWithoutFeedback, View
+} from "react-native";
 import AppButton from "./AppButton";
 import Icon from "./Icon";
-import { Controller, useForm, useFieldArray } from "react-hook-form";
+import Screen from "./Screen";
+import StudyMateIcon from "./StudyMateIcon";
 
 // Notifications.setNotificationHandler({
 //   handleNotification: async () => ({

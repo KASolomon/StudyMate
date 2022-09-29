@@ -1,17 +1,17 @@
 import { StatusBar } from "expo-status-bar";
 import { Box, NativeBaseProvider } from "native-base";
 import { StyleSheet } from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import CwaScreen from "./app/screens/CwaScreen";
 import SemesterCoursesScreen from "./app/screens/SemesterCoursesScreen";
-import ProgrammeScreen from './app/screens/ProgrammeScreen';
-import TargetDisplayScreen from './app/screens/TargetDisplayScreen';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from "@react-navigation/native";
-import WelcomeScreen from './app/screens/WelcomeScreen';
-import { createStackNavigator } from "@react-navigation/stack";
+import ProgrammeScreen from "./app/screens/ProgrammeScreen";
+import TargetDisplayScreen from "./app/screens/TargetDisplayScreen";
+import WelcomeScreen from "./app/screens/WelcomeScreen";
 import AppNotification from "./app/components/AppNotification";
-import TestingSelect from "./app/screens/TestingSelect";
-
+import SetTimetableScreen from "./app/screens/SetTimetableScreen";
+import Home from "./app/screens/Home";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -20,7 +20,7 @@ export default function App() {
   return (
     <NativeBaseProvider>
       <Box flex={1} bg="#fff">
-        {/* <NavigationContainer>
+        <NavigationContainer>
           <Stack.Navigator
             screenOptions={{
               headerShown: false,
@@ -43,21 +43,20 @@ export default function App() {
               options={{ header: false }}
             />
             <Stack.Screen
-              name="AppNotification"
-              component={AppNotification}
+              name="SetTimetableScreen"
+              component={SetTimetableScreen}
               options={{ header: false }}
             />
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={{ header: false }}
+            />
+            
           </Stack.Navigator>
-        </NavigationContainer> */}
-        <TestingSelect/>
-        {/* <AppNotification /> */}
-        {/* <CwaScreen/> */}
-        {/* <SemesterCoursesScreen/> */}
-        {/* <ProgrammeScreen /> */}
-
-        {/* <PrevSemCourses/> */}
-        {/* <DisplayScreen2/> */}
-        {/* <TargetDisplayScreen /> */}
+        </NavigationContainer>
+        
+        {/* <Home /> */}
         <StatusBar style="auto" />
       </Box>
     </NativeBaseProvider>

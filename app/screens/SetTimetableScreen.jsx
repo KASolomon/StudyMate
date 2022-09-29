@@ -17,9 +17,9 @@ import Screen from "../components/Screen";
 import StudyMateIcon from "../components/StudyMateIcon";
 import font from "../config/font";
 
-export default function TestingSelect() {
+export default function SetTimetableScreen({ navigation }) {
   //form initializations
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit, setValue } = useForm();
   const {
     fields: mondayfields,
     append: appendmonday,
@@ -58,7 +58,15 @@ export default function TestingSelect() {
 
   //state variables
   const [showPicker, setShowPicker] = useState(false);
-  const [showPicker1, setShowPicker1] = useState(false);
+  const [showPicker1, setShowPicker1] = useState({
+    monday: [false],
+    tuesday: [false],
+    wednesday: [false],
+    thursday: [false],
+    friday: [false],
+    saturday: [false],
+    sunday: [false],
+  });
   const [storedCourse, setStoredCourse] = useState([]);
 
   //predefined functions
@@ -75,14 +83,19 @@ export default function TestingSelect() {
   const handleFormSubmit = async (values) => {
     const timetableData = JSON.stringify(values);
     await AsyncStorage.setItem("timetable", timetableData);
+    navigation.navigate('Home');
+    console.log(values)
+    //display a checkmark animation
   };
-  const onChangeDateTime = (selectedTime) => {
+
+  const onChangeDateTime = (selectedTime, name) => {
     const date = new Date(selectedTime);
     const hours = date.getHours();
     const minutes = date.getMinutes();
     const time = `${hours <= 9 ? "0" + hours : hours}:${
       minutes <= 9 ? "0" + minutes : minutes
     }`;
+    setValue(name, time);
     return time;
   };
   const coursenames = ["Data", "Structures", "Mini", "Project"];
@@ -136,7 +149,12 @@ export default function TestingSelect() {
                   render={({ field: { onChange, value } }) => (
                     <>
                       <TouchableWithoutFeedback
-                        onPress={() => setShowPicker(true)}
+                        onPress={() => {
+                          let showPickerobject = { ...showPicker1 };
+                          showPickerobject.monday[index] = true;
+
+                          setShowPicker1(showPickerobject);
+                        }}
                       >
                         <View
                           style={{
@@ -148,7 +166,10 @@ export default function TestingSelect() {
                           }}
                         >
                           <Input
-                            value={onChangeDateTime(value)}
+                            value={onChangeDateTime(
+                              value,
+                              `monday.${index}.timeString`
+                            )}
                             variant="underlined"
                             isReadOnly={true}
                             w={"60%"}
@@ -164,14 +185,18 @@ export default function TestingSelect() {
                           />
                         </View>
                       </TouchableWithoutFeedback>
-                      {showPicker && (
+                      {showPicker1.monday[index] && (
                         <DateTimePicker
                           testID="dateTimePicker"
                           value={value}
                           mode={"time"}
                           is24Hour={true}
                           onChange={(event, selectedTime) => {
-                            setShowPicker(false);
+                            let showPickerobject = { ...showPicker1 };
+                            showPickerobject.monday[index] = false;
+
+                            setShowPicker1(showPickerobject);
+                            // setShowPicker1(false);
                             onChange(selectedTime);
                           }}
                         />
@@ -198,7 +223,12 @@ export default function TestingSelect() {
             title={"+"}
             style={{ width: "20%", borderRadius: 0 }}
             onPress={() => {
-              appendmonday({ course: "", time: new Date() });
+              appendmonday({ course: "", time: new Date(), timeString: "" });
+
+              let showPickerobject = { ...showPicker1 };
+              showPickerobject.monday[mondayfields.length - 1] = false;
+
+              setShowPicker1(showPickerobject);
             }}
           />
         </Box>
@@ -222,7 +252,7 @@ export default function TestingSelect() {
                       minWidth={"80%"}
                       mr={-8}
                     >
-                      {coursenames.map((course, index) => (
+                      {storedCourse.map((course, index) => (
                         <Select.Item
                           label={course}
                           value={course}
@@ -251,7 +281,10 @@ export default function TestingSelect() {
                           }}
                         >
                           <Input
-                            value={onChangeDateTime(value)}
+                            value={onChangeDateTime(
+                              value,
+                              `tuesday.${index}.timeString`
+                            )}
                             variant="underlined"
                             isReadOnly={true}
                             w={"60%"}
@@ -301,7 +334,7 @@ export default function TestingSelect() {
             title={"+"}
             style={{ width: "20%", borderRadius: 0 }}
             onPress={() => {
-              appendtuesday({ course: "", time: new Date() });
+              appendtuesday({ course: "", time: new Date() , timeString: ""  });
             }}
           />
         </Box>
@@ -325,7 +358,7 @@ export default function TestingSelect() {
                       minWidth={"80%"}
                       mr={-8}
                     >
-                      {coursenames.map((course, index) => (
+                      {storedCourse.map((course, index) => (
                         <Select.Item
                           label={course}
                           value={course}
@@ -354,7 +387,10 @@ export default function TestingSelect() {
                           }}
                         >
                           <Input
-                            value={onChangeDateTime(value)}
+                            value={onChangeDateTime(
+                              value,
+                              `wednesday.${index}.timeString`
+                            )}
                             variant="underlined"
                             isReadOnly={true}
                             w={"60%"}
@@ -404,7 +440,7 @@ export default function TestingSelect() {
             title={"+"}
             style={{ width: "20%", borderRadius: 0 }}
             onPress={() => {
-              appendwednesday({ course: "", time: new Date() });
+              appendwednesday({ course: "", time: new Date() , timeString: "" });
             }}
           />
         </Box>
@@ -428,7 +464,7 @@ export default function TestingSelect() {
                       minWidth={"80%"}
                       mr={-8}
                     >
-                      {coursenames.map((course, index) => (
+                      {storedCourse.map((course, index) => (
                         <Select.Item
                           label={course}
                           value={course}
@@ -457,7 +493,10 @@ export default function TestingSelect() {
                           }}
                         >
                           <Input
-                            value={onChangeDateTime(value)}
+                            value={onChangeDateTime(
+                              value,
+                              `thursday.${index}.timeString`
+                            )}
                             variant="underlined"
                             isReadOnly={true}
                             w={"60%"}
@@ -507,7 +546,7 @@ export default function TestingSelect() {
             title={"+"}
             style={{ width: "20%", borderRadius: 0 }}
             onPress={() => {
-              appendthursday({ course: "", time: new Date() });
+              appendthursday({ course: "", time: new Date(), timeString: "" });
             }}
           />
         </Box>
@@ -531,7 +570,7 @@ export default function TestingSelect() {
                       minWidth={"80%"}
                       mr={-8}
                     >
-                      {coursenames.map((course, index) => (
+                      {storedCourse.map((course, index) => (
                         <Select.Item
                           label={course}
                           value={course}
@@ -560,7 +599,10 @@ export default function TestingSelect() {
                           }}
                         >
                           <Input
-                            value={onChangeDateTime(value)}
+                            value={onChangeDateTime(
+                              value,
+                              `friday.${index}.timeString`
+                            )}
                             variant="underlined"
                             isReadOnly={true}
                             w={"60%"}
@@ -610,7 +652,7 @@ export default function TestingSelect() {
             title={"+"}
             style={{ width: "20%", borderRadius: 0 }}
             onPress={() => {
-              appendfriday({ course: "", time: new Date() });
+              appendfriday({ course: "", time: new Date(), timeString: "" });
             }}
           />
         </Box>
@@ -634,7 +676,7 @@ export default function TestingSelect() {
                       minWidth={"80%"}
                       mr={-8}
                     >
-                      {coursenames.map((course, index) => (
+                      {storedCourse.map((course, index) => (
                         <Select.Item
                           label={course}
                           value={course}
@@ -663,7 +705,10 @@ export default function TestingSelect() {
                           }}
                         >
                           <Input
-                            value={onChangeDateTime(value)}
+                            value={onChangeDateTime(
+                              value,
+                              `saturday.${index}.timeString`
+                            )}
                             variant="underlined"
                             isReadOnly={true}
                             w={"60%"}
@@ -713,7 +758,7 @@ export default function TestingSelect() {
             title={"+"}
             style={{ width: "20%", borderRadius: 0 }}
             onPress={() => {
-              appendsaturday({ course: "", time: new Date() });
+              appendsaturday({ course: "", time: new Date(), timeString: "" });
             }}
           />
         </Box>
@@ -737,7 +782,7 @@ export default function TestingSelect() {
                       minWidth={"80%"}
                       mr={-8}
                     >
-                      {coursenames.map((course, index) => (
+                      {storedCourse.map((course, index) => (
                         <Select.Item
                           label={course}
                           value={course}
@@ -766,7 +811,10 @@ export default function TestingSelect() {
                           }}
                         >
                           <Input
-                            value={onChangeDateTime(value)}
+                            value={onChangeDateTime(
+                              value,
+                              `sunday.${index}.timeString`
+                            )}
                             variant="underlined"
                             isReadOnly={true}
                             w={"60%"}
@@ -816,7 +864,7 @@ export default function TestingSelect() {
             title={"+"}
             style={{ width: "20%", borderRadius: 0 }}
             onPress={() => {
-              appendsunday({ course: "", time: new Date() });
+              appendsunday({ course: "", time: new Date(), timeString: "" });
             }}
           />
         </Box>

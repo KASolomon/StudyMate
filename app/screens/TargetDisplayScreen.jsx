@@ -11,6 +11,8 @@ import ActivityIndicator from "../assets/ActivityIndicator";
 import AppButton from "../components/AppButton";
 import DataTabl from "./Table";
 
+import SetTimetableScreen from "./SetTimetableScreen";
+
 const data = [
   { course: "Introduction to structured programming", score: 89 },
   { course: "Assembly Language", score: 66 },
@@ -130,7 +132,7 @@ export default function TargetDisplayScreen({navigation}) {
         <AppButton
           title={"Show Me"}
           color={"black"}
-          onPress={() => navigation.navigate('AppNotification')}
+          onPress={() => navigation.navigate('SetTimetableScreen')}
         />
         {myScores && <DataTabl data={myScores} />}
 

@@ -24,7 +24,6 @@ const data = [
 ];
 export default function TargetDisplayScreen({navigation}) {
   const [compute, setCompute] = useState(true);
-  const [higher, setHigher] = useState(false);
   const [myScores, setMyScores] = useState([]);
   let [finalcwa, setFinalcwa] = useState(0);
 
@@ -81,7 +80,7 @@ export default function TargetDisplayScreen({navigation}) {
 
       setMyScores(cours);
       if(myScores.length>0){
-        console.log('running calculations')
+        //target score computation
         calculate(myScores);
       }
       if(compute) setCompute(false)
@@ -113,10 +112,7 @@ export default function TargetDisplayScreen({navigation}) {
       accumulated += addition;
     }
     setMyScores(myScores);
-    let finalcwa = accumulated / totalcredit;
-    accumulated > weightedavg
-      ? setHigher(true) && setFinalcwa(finalcwa)
-      : setFinalcwa(targetcwa);
+  setFinalcwa(targetcwa)
 
   };
   useEffect(() => {
@@ -129,16 +125,30 @@ export default function TargetDisplayScreen({navigation}) {
         <StudyMateIcon
           caption={"Try aiming at these scores for this semester"}
         />
-        <AppButton
-          title={"Show Me"}
-          color={"black"}
-          onPress={() => navigation.navigate('SetTimetableScreen')}
-        />
-        {myScores && <DataTabl data={myScores} />}
 
-        
-          <AppText>Target CWA {finalcwa}</AppText>
-        
+        {myScores && <DataTabl data={myScores} />}
+        <AppText style ={{fontStyle : 'italic'}}>Target CWA {finalcwa}</AppText>
+
+        <Box flexDir={"row"} justifyContent={"space-evenly"}>
+          <AppButton
+            title={"timetable"}
+            color={"black"}
+            style={{ width: "45%" }}
+            iName={"timetable"}
+            iSize={25}
+            iColor={"white"}
+            onPress={() => navigation.navigate("SetTimetableScreen")}
+          />
+          <AppButton
+            title={"Home"}
+            color={"black"}
+            iName={"home"}
+            iColor={"white"}
+            iSize={25}
+            style={{ width: "40%" }}
+            onPress={() => navigation.navigate("Home")}
+          />
+        </Box>
       </Screen>
     </>
   );

@@ -1,21 +1,21 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import Screen from '../components/Screen';
-import { NavigationContainer } from '@react-navigation/native';
 
 
 export default function Home() {
+  const getBioData = async () => {
+    const result = AsyncStorage.getItem('biodata');
+    
+  };
+
     const Tab = createBottomTabNavigator();
   return (
         <Screen>
 
-    <NavigationContainer>
-        <Tab.Navigator >
-        <Tab.Screen name={'Home'} component ={Home}/>
-
-        </Tab.Navigator>
-    </NavigationContainer>
+    
     <View>
       <Text>Home</Text>
     </View>

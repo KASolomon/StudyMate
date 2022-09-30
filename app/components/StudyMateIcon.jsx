@@ -29,6 +29,6 @@ const styles = StyleSheet.create({
   },
   caption: {
     alignSelf: "center",
-    marginBottom: 20,
+    marginBottom: 25,
   },
 });

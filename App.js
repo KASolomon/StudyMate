@@ -65,8 +65,8 @@ export default function App() {
           {oldUser ? <Text>Hello</Text> : <InitialNavigation />}
         </NavigationContainer> */}
 
-        {/* <Home /> */}
-        <TargetDisplayScreen/>
+        <Home />
+        {/* <TargetDisplayScreen/> */}
         <StatusBar style="auto" />
       </Box>
     </NativeBaseProvider>

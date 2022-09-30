@@ -83,8 +83,8 @@ export default function SetTimetableScreen({ navigation }) {
   const handleFormSubmit = async (values) => {
     const timetableData = JSON.stringify(values);
     await AsyncStorage.setItem("timetable", timetableData);
-    navigation.navigate('Home');
-    console.log(values)
+    navigation.navigate("Home");
+    console.log(values);
     //display a checkmark animation
   };
 
@@ -219,9 +219,15 @@ export default function SetTimetableScreen({ navigation }) {
             );
           })}
           <AppButton
-            color={"green"}
+            color={"white"}
             title={"+"}
-            style={{ width: "20%", borderRadius: 0 }}
+            style={{
+              width: "20%",
+              borderRadius: 50,
+              borderColor: "black",
+              borderWidth: 3,
+            }}
+            textStyle={{ color: "black", fontSize: 25 }}
             onPress={() => {
               appendmonday({ course: "", time: new Date(), timeString: "" });
 
@@ -330,11 +336,17 @@ export default function SetTimetableScreen({ navigation }) {
             );
           })}
           <AppButton
-            color={"green"}
+            color={"white"}
             title={"+"}
-            style={{ width: "20%", borderRadius: 0 }}
+            style={{
+              width: "20%",
+              borderRadius: 50,
+              borderColor: "black",
+              borderWidth: 3,
+            }}
+            textStyle={{ color: "black", fontSize: 25 }}
             onPress={() => {
-              appendtuesday({ course: "", time: new Date() , timeString: ""  });
+              appendtuesday({ course: "", time: new Date(), timeString: "" });
             }}
           />
         </Box>
@@ -436,11 +448,17 @@ export default function SetTimetableScreen({ navigation }) {
             );
           })}
           <AppButton
-            color={"green"}
+            color={"white"}
             title={"+"}
-            style={{ width: "20%", borderRadius: 0 }}
+            style={{
+              width: "20%",
+              borderRadius: 50,
+              borderColor: "black",
+              borderWidth: 3,
+            }}
+            textStyle={{ color: "black", fontSize: 25 }}
             onPress={() => {
-              appendwednesday({ course: "", time: new Date() , timeString: "" });
+              appendwednesday({ course: "", time: new Date(), timeString: "" });
             }}
           />
         </Box>
@@ -542,9 +560,15 @@ export default function SetTimetableScreen({ navigation }) {
             );
           })}
           <AppButton
-            color={"green"}
+            color={"white"}
             title={"+"}
-            style={{ width: "20%", borderRadius: 0 }}
+            style={{
+              width: "20%",
+              borderRadius: 50,
+              borderColor: "black",
+              borderWidth: 3,
+            }}
+            textStyle={{ color: "black", fontSize: 25 }}
             onPress={() => {
               appendthursday({ course: "", time: new Date(), timeString: "" });
             }}
@@ -648,9 +672,15 @@ export default function SetTimetableScreen({ navigation }) {
             );
           })}
           <AppButton
-            color={"green"}
+            color={"white"}
             title={"+"}
-            style={{ width: "20%", borderRadius: 0 }}
+            style={{
+              width: "20%",
+              borderRadius: 50,
+              borderColor: "black",
+              borderWidth: 3,
+            }}
+            textStyle={{ color: "black", fontSize: 25 }}
             onPress={() => {
               appendfriday({ course: "", time: new Date(), timeString: "" });
             }}
@@ -754,9 +784,15 @@ export default function SetTimetableScreen({ navigation }) {
             );
           })}
           <AppButton
-            color={"green"}
+            color={"white"}
             title={"+"}
-            style={{ width: "20%", borderRadius: 0 }}
+            style={{
+              width: "20%",
+              borderRadius: 50,
+              borderColor: "black",
+              borderWidth: 3,
+            }}
+            textStyle={{ color: "black", fontSize: 25 }}
             onPress={() => {
               appendsaturday({ course: "", time: new Date(), timeString: "" });
             }}
@@ -860,9 +896,15 @@ export default function SetTimetableScreen({ navigation }) {
             );
           })}
           <AppButton
-            color={"green"}
+            color={"white"}
             title={"+"}
-            style={{ width: "20%", borderRadius: 0 }}
+            style={{
+              width: "20%",
+              borderRadius: 50,
+              borderColor: "black",
+              borderWidth: 3,
+            }}
+            textStyle={{ color: "black", fontSize: 25 }}
             onPress={() => {
               appendsunday({ course: "", time: new Date(), timeString: "" });
             }}
@@ -881,7 +923,7 @@ export default function SetTimetableScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   timetableContainer: {
-    backgroundColor: "gray",
+    backgroundColor: "#ccc",
     width: 350,
     height: "auto",
     marginRight: 10,

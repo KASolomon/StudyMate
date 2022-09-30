@@ -4,14 +4,14 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import colors from "../config/colors";
 import Icon from "./Icon";
 
-function AppButton({ style, title, onPress, color, iName, iSize, iColor}) {
+function AppButton({ style, title, onPress, color, textStyle, iName, iSize, iColor}) {
   return (
     <TouchableOpacity
       style={[styles.button, { backgroundColor: color }, { ...style }]}
       onPress={onPress} 
       
     >
-      <Text style={styles.text}>{title}</Text>
+      <Text style={[styles.text, textStyle]}>{title}</Text>
       {iName && (
         <Icon name={iName} size={iSize} color={iColor} style={styles.icon} />
       )}

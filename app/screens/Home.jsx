@@ -22,7 +22,6 @@ export default function Home() {
   }, []);
 
   const keys = Object.keys(biodata).length;
-  const Tab = createBottomTabNavigator();
   const { level, name, programme, semester } = biodata;
   const standing = `${level}, semester ${semester}`;
 

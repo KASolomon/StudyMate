@@ -24,11 +24,15 @@ const data = [
 ];
 export default function TargetDisplayScreen({navigation}) {
   const [compute, setCompute] = useState(true);
+  const [oldUser, setOldUser] = useState(false);
   const [myScores, setMyScores] = useState([]);
   let [finalcwa, setFinalcwa] = useState(0);
 
   const getData = async () => {
     try {
+      //check for new user
+      const storedUserStatus = await AsyncStorage.getItem('olduser');
+      const userStatus = JSON.parse(storedUserStatus);
       //retrieving cwa data
       const cwa = await AsyncStorage.getItem("cwa");
       const cwadata = JSON.parse(cwa);
@@ -39,7 +43,6 @@ export default function TargetDisplayScreen({navigation}) {
       //retrieving programme data data
       const bio = await AsyncStorage.getItem("initialbio");
       const biodata = JSON.parse(bio);
-      // const user1 = ["", "", ""];
 
       const cours = [];
       const currentcwa = parseInt(cwadata.currentcwa);
@@ -48,7 +51,6 @@ export default function TargetDisplayScreen({navigation}) {
       const semester = biodata.semester;
       const totalcredit = semcourses.totalcredit;
 
-      //let courses = myScores[0]?.courses;
       // initial computations
       const cwadiff = targetcwa - currentcwa;
       const sems = 2 * (year - 1) + semester;
@@ -79,6 +81,7 @@ export default function TargetDisplayScreen({navigation}) {
       });
 
       setMyScores(cours);
+      setOldUser(userStatus);
       if(myScores.length>0){
         //target score computation
         calculate(myScores);
@@ -130,6 +133,9 @@ export default function TargetDisplayScreen({navigation}) {
         <AppText style ={{fontStyle : 'italic'}}>Target CWA {finalcwa}</AppText>
 
         <Box flexDir={"row"} justifyContent={"space-evenly"}>
+          {!oldUser &&
+          <>
+          
           <AppButton
             title={"timetable"}
             color={"black"}
@@ -148,6 +154,9 @@ export default function TargetDisplayScreen({navigation}) {
             style={{ width: "40%" }}
             onPress={() => navigation.navigate("Home")}
           />
+          </>
+          }
+          
         </Box>
       </Screen>
     </>

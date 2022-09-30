@@ -27,10 +27,8 @@ export default function SemesterCoursesScreen({navigation}) {
     values = {totalcredit, ...values};
     try {
       const jsonValue = JSON.stringify(values);
-      const oldUser = JSON.stringify(true);
       
       await AsyncStorage.setItem("semcourse", jsonValue);
-      await AsyncStorage.setItem("olduser", oldUser);
       navigation.navigate("TargetDisplayScreen");
       console.log("stored");
     } catch (error) {

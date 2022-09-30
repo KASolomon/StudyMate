@@ -107,10 +107,10 @@ export default function App() {
   return (
     <NativeBaseProvider>
       <Box flex={1} bg="#fff">
-        {/* <NavigationContainer>
+        <NavigationContainer>
           {oldUser ? <AppTabNavigator/> : <InitialNavigation />}
-        </NavigationContainer> */}
-    <SetTimetableScreen/>
+        </NavigationContainer>
+        {/* <SetTimetableScreen/> */}
         {/* <Home /> */}
         {/* <TargetDisplayScreen/> */}
         <StatusBar style="auto" />

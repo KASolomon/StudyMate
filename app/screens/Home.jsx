@@ -12,6 +12,7 @@ import StudyMateIcon from "./../components/StudyMateIcon";
 export default function Home() {
   const [biodata, setBioData] = useState({});
   const getBioData = async () => {
+    // const myresult = await AsyncStorage.clear();
     const result = await AsyncStorage.getItem("initialbio");
     const data = JSON.parse(result);
     setBioData({ ...data });

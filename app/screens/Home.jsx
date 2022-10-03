@@ -28,7 +28,7 @@ export default function Home() {
 
   return (
     <Box flex={1}>
-      {keys > 0 ? (
+      
         <Screen>
           <StudyMateIcon caption={`Welcome, it's good to see you ${name}. `} />
           <DashboardCard
@@ -53,16 +53,17 @@ export default function Home() {
             iconColor={"white"}
           />
         </Screen>
-      ) : (
-        <Box>
-          <AppText>
-            Sorry. We're having trouble retrieving your data. Kindly restart the
-            app.😉{" "}
-          </AppText>
-        </Box>
-      )}
+      
     </Box>
   );
 }
 
+// : (
+//         <Box>
+//           <AppText>
+//             Sorry. We're having trouble retrieving your data. Kindly restart the
+//             app.😉{" "}
+//           </AppText>
+//         </Box>
+//       )}
 const styles = StyleSheet.create({});

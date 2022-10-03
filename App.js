@@ -14,6 +14,7 @@ import TimetableScreen from "./app/screens/TimetableScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import AppNotification from "./app/components/AppNotification";
 import SetTimetableScreen from "./app/screens/SetTimetableScreen";
+import TabNavigatorScreen from "./app/screens/TabNavigatorScreen";
 import Home from "./app/screens/Home";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Icon from "./app/components/Icon";
@@ -21,16 +22,18 @@ import colors from "./app/config/colors";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
-
+ 
 export default function App() {
   const [oldUser, setOldUser] = useState(false);
   const checkOldUser = async () => {
     const result = await AsyncStorage.getItem("olduser");
+    console.log(JSON.parse(result))
     if (!result) {
       setOldUser(false);
       return 0;
     }
     setOldUser(true);
+    console.log(result)
     return 1;
   };
 
@@ -56,6 +59,11 @@ export default function App() {
       <Stack.Screen
         name="SetTimetableScreen"
         component={SetTimetableScreen}
+        options={{ header: false }}
+      />
+      <Stack.Screen
+        name="TabNavigatorScreen"
+        component={TabNavigatorScreen}
         options={{ header: false }}
       />
       <Stack.Screen name="Home" component={Home} options={{ header: false }} />
@@ -109,6 +117,7 @@ export default function App() {
       <Box flex={1} bg="#fff">
         <NavigationContainer>
           {oldUser ? <AppTabNavigator/> : <InitialNavigation />}
+          {/* <TabNavigatorScreen/> */}
         </NavigationContainer>
         {/* <SetTimetableScreen/> */}
         {/* <Home /> */}

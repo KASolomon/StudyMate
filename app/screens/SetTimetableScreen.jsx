@@ -83,10 +83,16 @@ export default function SetTimetableScreen({ navigation }) {
   const handleFormSubmit = async (values) => {
     const timetableData = JSON.stringify(values);
     await AsyncStorage.setItem("timetable", timetableData);
-          const oldUser = JSON.stringify(true);
-          await AsyncStorage.setItem("olduser", oldUser);
+    const oldUser = JSON.stringify(true);
+    await AsyncStorage.setItem("olduser", oldUser);
 
-    navigation.navigate("Home");
+//debugging
+    const test = await AsyncStorage.getItem("olduser");
+console.log(JSON.parse(test))
+
+
+
+    navigation.navigate("TabNavigatorScreen");
     console.log(values);
     //display a checkmark animation
   };

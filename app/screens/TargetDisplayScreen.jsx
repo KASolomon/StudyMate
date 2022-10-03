@@ -13,15 +13,6 @@ import DataTabl from "./Table";
 
 import SetTimetableScreen from "./SetTimetableScreen";
 
-const data = [
-  { course: "Introduction to structured programming", score: 89 },
-  { course: "Assembly Language", score: 66 },
-  { course: "Introduction to Visual Basic", score: 77 },
-  { course: "Operations Research I", score: 96 },
-  { course: "Operations Research II", score: 68 },
-  { course: "Real-Time and Embedded Systems", score: 79 },
-  { course: "Computer Networks", score: 87 },
-];
 export default function TargetDisplayScreen({navigation}) {
   const [compute, setCompute] = useState(true);
   const [oldUser, setOldUser] = useState(false);
@@ -152,7 +143,7 @@ export default function TargetDisplayScreen({navigation}) {
             iColor={"white"}
             iSize={25}
             style={{ width: "40%" }}
-            onPress={() => navigation.navigate("Home")}
+            onPress={() => navigation.navigate("TabNavigatorScreen")}
           />
           </>
           }

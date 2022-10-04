@@ -9,6 +9,8 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import * as Notifications from "expo-notifications";
+
 
 import AppButton from "../components/AppButton";
 import AppText from "../components/AppText";
@@ -16,6 +18,17 @@ import Icon from "../components/Icon";
 import Screen from "../components/Screen";
 import StudyMateIcon from "../components/StudyMateIcon";
 import font from "../config/font";
+
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+  }),
+});
+
+
+
 
 export default function SetTimetableScreen({ navigation }) {
   //form initializations
@@ -68,6 +81,8 @@ export default function SetTimetableScreen({ navigation }) {
     sunday: [false],
   });
   const [storedCourse, setStoredCourse] = useState([]);
+  const [timetableSchedule, setTimetableSchedule] = useState([]);
+  const [restart, setRestart] = useState(0);
 
   //predefined functions
   const getCourseNames = async () => {
@@ -79,6 +94,83 @@ export default function SetTimetableScreen({ navigation }) {
     });
     setStoredCourse(courseNames);
   };
+  //schedule notifications functions. Supply it with coursename and ISO time from 'timetable' data
+  const scheduleNotification = async (schedules) => {
+    for (let { time, coursename, day } of schedules) {
+      const scheduledDate = new Date(time);
+      const hour = scheduledDate.getHours();
+      const minute = scheduledDate.getMinutes();
+      const weekday = 1;
+
+      switch (day) {
+        case "monday":
+          weekday = 2;
+          break;
+        case "tuesday":
+          weekday = 3;
+          break;
+        case "wednesday":
+          weekday = 4;
+          break;
+        case "thursday":
+          weekday = 5;
+          break;
+        case "friday":
+          weekday = 6;
+          break;
+        case "saturday":
+          weekday = 7;
+          break;
+        default:
+          break;
+      }
+      // console.log(weekday);
+      if (coursename) {
+        await Notifications.scheduleNotificationAsync({
+          content: {
+            title: "The books are waiting 😁",
+            body: `${coursename} is up for today.`,
+          },
+          trigger: {
+            weekday,
+            //weekdays start from Sunday(index 0)
+            hour,
+            minute,
+            repeats: true,
+          },
+        });
+        console.log("scheduled")
+      } else {
+        setRestart(restart + 1);
+      }
+    }
+        navigation.navigate("TabNavigatorScreen");
+
+  };
+  const getTimetable = async (values) => {
+    if (restart == 0) {
+      setRestart(1);
+    }
+    const fetchresult = await AsyncStorage.getItem("timetable");
+    const timetabledata = JSON.parse(fetchresult);
+    // console.log(timetabledata);
+    let packaged = [];
+    for (let key in values) {
+      if (values[key].length > 0) {
+        for (let timetable of values[key]) {
+          packaged.push({
+            day: key,
+            coursename: timetable.course,
+            time: timetable.time,
+          });
+        }
+      }
+    }
+    setTimetableSchedule(packaged);
+    // console.log(timetableSchedule);
+
+    scheduleNotification(timetableSchedule);
+  };
 
   const handleFormSubmit = async (values) => {
     const timetableData = JSON.stringify(values);
@@ -86,13 +178,12 @@ export default function SetTimetableScreen({ navigation }) {
     const oldUser = JSON.stringify(true);
     await AsyncStorage.setItem("olduser", oldUser);
 
-//debugging
+    //debugging
     const test = await AsyncStorage.getItem("olduser");
-console.log(JSON.parse(test))
+    // console.log(JSON.parse(test));
 
+    getTimetable(values);
 
-
-    navigation.navigate("TabNavigatorScreen");
     console.log(values);
     //display a checkmark animation
   };
@@ -111,7 +202,7 @@ console.log(JSON.parse(test))
 
   useEffect(() => {
     getCourseNames();
-  }, []);
+  }, [restart]);
 
   return (
     <Screen>

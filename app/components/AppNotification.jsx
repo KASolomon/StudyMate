@@ -4,76 +4,65 @@ import { Box, Input, Select } from "native-base";
 import React, { useEffect, useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import {
-  Button, StyleSheet, TouchableWithoutFeedback, View
+  Button,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
 } from "react-native";
 import AppButton from "./AppButton";
 import Icon from "./Icon";
 import Screen from "./Screen";
 import StudyMateIcon from "./StudyMateIcon";
 
-// Notifications.setNotificationHandler({
-//   handleNotification: async () => ({
-//     shouldShowAlert: true,
-//     shouldPlaySound: true,
 
-//   }),
-// });
 
-// Notifications.scheduleNotificationAsync({
-//   content: {
-//     title: "The books are waiting 😁",
-//     body: "Data Structures is up for today",
-//   },
-//   trigger: {
-//     seconds : 2
-//   },
-// });
+// scheduleNotification();
 
 export default function AppNotification({ navigation }) {
-  const [storedCourse, setStoredCourse] = useState([]);
-  const [time, setTime] = useState(new Date());
-  const [timeString, setTimeString] = useState("");
-  const [showPicker, setShowPicker] = useState(false);
+
+
+  // console.log(timetableSchedule);
+  
 
   //form intialization variables for timetable 'form' data built with react-hook-form
   const { handleSubmit, control } = useForm();
   const { fields, append, remove } = useFieldArray({ control, name: "monday" });
 
-  const getCourseNames = async () => {
-    const semcourses = await AsyncStorage.getItem("semcourse");
-    const { courses } = JSON.parse(semcourses);
-    const courseNames = [];
-    courses.map((semcourse) => {
-      courseNames.push(semcourse.course);
-    });
-    setStoredCourse(courseNames);
-  };
-const handleFormSubmit = async (values) => {
-  console.log(values)
-};
+  //   const getCourseNames = async () => {
+  //     const semcourses = await AsyncStorage.getItem("semcourse");
+  //     const { courses } = JSON.parse(semcourses);
+  //     const courseNames = [];
+  //     courses.map((semcourse) => {
+  //       courseNames.push(semcourse.course);
+  //     });
+  //     setStoredCourse(courseNames);
+  //   };
+  // const handleFormSubmit = async (values) => {
+  //   console.log(values)
+  // };
 
-  useEffect(() => {
-    getCourseNames();
-  }, []);
+  //   useEffect(() => {
+  //     getCourseNames();
+  //   }, []);
   //   console.log(course);
 
-  const onChangeDateTime = (event, selectedTime) => {
-    const date = new Date(selectedTime);
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const time = `${hours <= 9 ? "0" + hours : hours}:${
-      minutes <= 9 ? "0" + minutes : minutes
-    }`;
+  // const onChangeDateTime = (event, selectedTime) => {
+  //   const date = new Date(selectedTime);
+  //   const hours = date.getHours();
+  //   const minutes = date.getMinutes();
+  //   const time = `${hours <= 9 ? "0" + hours : hours}:${
+  //     minutes <= 9 ? "0" + minutes : minutes
+  //   }`;
 
-    setShowPicker(false);
-    setTime(currentTime);
-    return time;
-  };
+  //   setShowPicker(false);
+  //   setTime(currentTime);
+  //   return time;
+  // };
   // console.log(time);
 
   return (
     <Screen style={styles.container}>
-      <StudyMateIcon
+      {/* <StudyMateIcon
         caption={
           "This would get us nowhere without a plan. Lets get you a timetable"
         }
@@ -86,7 +75,7 @@ const handleFormSubmit = async (values) => {
         <Box style={styles.timetableContainer}></Box>
         <Box style={styles.timetableContainer}></Box>
       </ScrollView> */}
-      {fields.map((field, index) => {
+      {/* {fields.map((field, index) => {
         <React.Fragment key={field.id}>
           <Controller
             control={control}
@@ -105,8 +94,8 @@ const handleFormSubmit = async (values) => {
               );
             }}
             rules = {{required : true}}
-          />
-          {/* <Controller
+          /> */}
+      {/* <Controller
             control={control}
             name={`monday.${index}.time`}
             render={({ field }) => {
@@ -154,7 +143,7 @@ const handleFormSubmit = async (values) => {
               );
             }}
           /> */}
-          {index > 0 ? (
+      {/* {index > 0 ? (
             <Button
               onPress={() => {
                 remove(index);
@@ -228,7 +217,7 @@ const handleFormSubmit = async (values) => {
             onChange={onChangeDateTime}
           />
         )}
-      </Box>
+      </Box> */}
     </Screen>
   );
 }

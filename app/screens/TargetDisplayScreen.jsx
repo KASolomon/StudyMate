@@ -7,7 +7,6 @@ import { Box } from "native-base";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import rand from "lodash.random";
 import AppText from "../components/AppText";
-import ActivityIndicator from "../assets/ActivityIndicator";
 import AppButton from "../components/AppButton";
 import DataTabl from "./Table";
 
@@ -115,7 +114,6 @@ export default function TargetDisplayScreen({navigation}) {
   return (
     <>
       <Screen>
-        {/* <ActivityIndicator visible={!showTable}/> */}
         <StudyMateIcon
           caption={"Try aiming at these scores for this semester"}
         />

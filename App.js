@@ -26,6 +26,8 @@ const Stack = createStackNavigator();
 export default function App() {
   const [oldUser, setOldUser] = useState(false);
   const checkOldUser = async () => {
+    // await AsyncStorage.clear()
+    // console.log('cleared')
     const result = await AsyncStorage.getItem("olduser");
     console.log(JSON.parse(result))
     if (!result) {
@@ -115,11 +117,15 @@ export default function App() {
   return (
     <NativeBaseProvider>
       <Box flex={1} bg="#fff">
-        <NavigationContainer>
+        {/* <InitialNavigation /> */}
+        {/* <NavigationContainer>
           {oldUser ? <AppTabNavigator/> : <InitialNavigation />}
-          {/* <TabNavigatorScreen/> */}
-        </NavigationContainer>
-        {/* <SetTimetableScreen/> */}
+        </NavigationContainer>  */}
+        {/* {/* <TabNavigatorScreen/> */}
+
+ <SetTimetableScreen /> 
+{/* <AppNotification/>  */}
+
         {/* <Home /> */}
         {/* <TargetDisplayScreen/> */}
         <StatusBar style="auto" />
